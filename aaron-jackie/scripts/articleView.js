@@ -41,7 +41,7 @@ articleView.handleAuthorFilter = function() {
       // Use an "attribute selector" to find those articles, and fade them in for the reader
       $('article').hide();
       let $author = $(this).val();
-      $(`article[data-author=${$author}]`).show();
+      $(`article[data-author=${$author}]`).fadeIn();
     } else {
       // TODOne: If the <select> menu was changed to an option that is blank, we should first show all the articles, except the one article we are using as a template.
       $('article').show();
@@ -59,7 +59,7 @@ articleView.handleCategoryFilter = function() {
     if ($(this).val()) {
       $('article').hide();
       let $author = $(this).val();
-      $(`article[data-category=${$author}]`).show();
+      $(`article[data-category=${$author}]`).fadeIn();
       // Be sure to reset the #author-filter while you are at it!
       $('#author-filter').val('');
     } else {
@@ -82,7 +82,7 @@ articleView.handleMainNav = function() {
 
   // REVIEW: Now trigger a click on the first .tab element, to set up the page.
   $('.main-nav .tab:first').on('click', function() {
-    $('article').show();
+    $('.article-body').show();
   });
 };
 
@@ -92,10 +92,20 @@ articleView.setTeasers = function() {
   // TODOne: Add an event handler to reveal all the hidden elements, when the .read-on link is clicked. You can go ahead and hide the "Read On" link once it has been clicked. Be sure to prevent the default link-click action!
   $('.read-on').on('click', function(){
     event.preventDefault();
-    $(this).prev().children().show();
-    $(this).hide();
+    $(this).prev().children().fadeIn();
+    $(this).text('Show Less -->');
+    articleView.reduceArticle();
   });
   // Ideally, we'd attach this as just one event handler on the #articles section, and let it process (in other words... delegate) any .read-on clicks that happen within child nodes.
+};
+
+//STRETCH GOAL
+articleView.reduceArticle = function() {
+  $('.read-on').on('click', function () {
+    $('.article-body *:nth-of-type(n+2)').prev().children().hide();
+    $(this).text('Read On -->');
+    articleView.setTeasers();
+  });
 };
 
 // TODOne: Call all of the above functions, once we are sure the DOM is ready.
