@@ -27,7 +27,7 @@ jQuery was predominantly used to populate the page with blog articles.
 
 #### Change Log
 03-21-2018 1800-2329 - Lots of struggling happened. Only the teaser function left.
-03-22-2018 1745 - Teaser function finished.
+03-22-2018 1745 - Teaser function finished and stretch goal achieved.
 
 #### Credits and Collaborations
 - Major thanks to Jay and Tyler for their guidance throughout the lab
